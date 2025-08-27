@@ -95,10 +95,49 @@
 
     // Массив гостей
     const guests = [
-      { id: 1, name: "Владимир Определенов", name_eng: "Vladimir Opredelenov", photo: "opredelenov.jpg", checked: false },
-      { id: 2, name: "Мария Иванова", name_eng: "Mariya Ivanova", photo: "ivanova.jpg", checked: false },
-      { id: 3, name: "Айдана Бағдатқызы", name_eng: "Aidana Bagdatkyzy", photo: "bagdatkyzy.jpeg", checked: false },
-      { id: 4, name: "Тимур Кулибаев", name_eng: "Timur Kulibayev", photo: "kulibayev.jpg", checked: false }
+      { id: 1, name: "Нурлан Смагулов", name_eng: "Nurlan Smagulov", photo: "smagulov.jpg", checked: false },
+      { id: 2, name: "Бекнур Несипбаев", name_eng: "Beknur Nesipbaev", photo: "nesipbaev.jpg", checked: false },
+      { id: 3, name: "Айжан Тулемисова", name_eng: "Aizhan Tulemissova", photo: "tulemissova.jpg", checked: false },
+      { id: 4, name: "Ериккали Туржанов", name_eng: "Yerikkali Turzhanov", photo: "turzhanov.jpg", checked: false },
+      { id: 5, name: "Руслан Омаров", name_eng: "Ruslan Omarov", photo: "omarov.jpg", checked: false },
+      { id: 6, name: "Кит Мэтью Симмонс", name_eng: "Kit Matthew Simmons", photo: "simmons.jpg", checked: false },
+      { id: 7, name: "Денис Коломацкий", name_eng: "Denis Kolomatskiy", photo: "kolomatskiy.jpg", checked: false },
+      { id: 8, name: "Мади Утешев", name_eng: "Madi Uteshev", photo: "uteshev.jpg", checked: false },
+      { id: 9, name: "Ержан Саябаев", name_eng: "Yerzhan Sayabayev", photo: "sayabayev.jpg", checked: false },
+      { id: 10, name: "Акылбек Анарбаев", name_eng: "Akylbek Anarbayev", photo: "anarbayev.jpg", checked: false },
+      { id: 11, name: "Дархан Алимуканов", name_eng: "Darkhan Alimukanov", photo: "alimukanov.jpg", checked: false },
+      { id: 12, name: "Андрей Шарай", name_eng: "Andrey Sharay", photo: "sharay.jpg", checked: false },
+      { id: 13, name: "Мукарама Каюмова", name_eng: "Mukarama Kayumova", photo: "kayumova.jpg", checked: false },
+      { id: 14, name: "Дана Каримова", name_eng: "Dana Karimova", photo: "karimova.jpg", checked: false },
+      { id: 15, name: "Александр Пальчиков", name_eng: "Alexander Palchikov", photo: "palchikov.jpg", checked: false },
+      { id: 16, name: "Алексей Терре", name_eng: "Alexey Terre", photo: "terre.jpg", checked: false },
+      { id: 17, name: "Алишер Еликбаев", name_eng: "Alisher Yelikbayev", photo: "yelikbayev.jpg", checked: false },
+      { id: 18, name: "Владимир Ким", name_eng: "Vladimir Kim", photo: "vladimir_kim.jpg", checked: false },
+      { id: 19, name: "​Булат Утемуратов", name_eng: "Bulat Utemuratov", photo: "utemuratov.jpg", checked: false },
+      { id: 20, name: "Арсен Томский", name_eng: "Arsen Tomsky", photo: "tomsky.jpg", checked: false },
+      { id: 21, name: "Кенес Ракишев", name_eng: "Kenes Rakishev", photo: "rakishev.jpg", checked: false },
+      { id: 22, name: "Еркин Татишев", name_eng: "Yerkin Tatishev", photo: "tatishev.jpg", checked: false },
+      // { id: 23, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 24, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 25, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 26, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 27, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 28, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 29, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 30, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 31, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 32, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 33, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },
+      // { id: 34, name: "", name_eng: "", photo: "anarbayev.jpg", checked: false },      
+
+
+      { id: 99, name: "Тимур Турлов", name_eng: "Timur Turlov", photo: "turlov.jpg", checked: false },
+      { id: 100, name: "Владимир Определенов", name_eng: "Vladimir Opredelenov", photo: "opredelenov.jpg", checked: false },
+      { id: 101, name: "Мария Иванова", name_eng: "Mariya Ivanova", photo: "ivanova.jpg", checked: false },
+      { id: 102, name: "Айдана Бағдатқызы", name_eng: "Aidana Bagdatkyzy", photo: "bagdatkyzy.jpeg", checked: false },
+      { id: 103, name: "Тимур Кулибаев", name_eng: "Timur Kulibayev", photo: "kulibayev.jpg", checked: false },
+      { id: 104, name: "Вячеслав Ким", name_eng: "Vyacheslav Kim", photo: "kim.jpeg", checked: false },
+      { id: 105, name: "Михаил Ломтадзе", name_eng: "Mikhail Lomtadze", photo: "lomtadze.jpg", checked: false }
     ];
 
     // Загружаем данные из Firestore
