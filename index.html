@@ -219,8 +219,6 @@
       // { id: 96, name: "", name_eng: "", photo: ".jpg", checked: false },
       // { id: 97, name: "", name_eng: "", photo: ".jpg", checked: false },
       // { id: 98, name: "", name_eng: "", photo: ".jpg", checked: false },      
-
-
       { id: 99, name: "Тимур Турлов", name_eng: "Timur Turlov", photo: "turlov.jpg", checked: false },
       { id: 100, name: "Владимир Определенов", name_eng: "Vladimir Opredelenov", photo: "opredelenov.jpg", checked: false },
       { id: 101, name: "Алмагуль Менлибаева", name_eng: "Almagul Menlibayeva", photo: "menlibayeva.jpg", checked: false },
@@ -265,15 +263,16 @@
         container.appendChild(div);
       });
     } */
-   // Функция для рендеринга гостей
-function render(list) {
-  const container = document.getElementById('guests');
-  container.innerHTML = "";
 
-  list.forEach(g => {
-    const div = document.createElement('div');
-    div.className = "guest" + (g.checked ? " checked" : "");
-    div.innerHTML = `
+    // Функция для рендеринга гостей
+    function render(list) {
+      const container = document.getElementById('guests');
+      container.innerHTML = "";
+
+      list.forEach(g => {
+        const div = document.createElement('div');
+        div.className = "guest" + (g.checked ? " checked" : "");
+        div.innerHTML = `
       <img src="${g.photo}" alt="">
       <div class="guest-info">
         <strong>${g.name}</strong><br>
@@ -283,9 +282,9 @@ function render(list) {
         ${g.checked ? "Зарегистрирован" : `<button onclick="toggleCheckIn(${g.id})">Ожидает регистрации</button>`}
       </div>
     `;
-    container.appendChild(div);
-  });
-}
+        container.appendChild(div);
+      });
+    }
 
     // Функция для переключения состояния гостя (вошёл/не вошёл)
     async function toggleCheckIn(id) {
