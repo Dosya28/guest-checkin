@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)file:///C:/Users/ai.bagdatkyzy/Desktop/test.html -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Check-in Guests</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    .guest {
+      border: 1px solid #ccc;
+      margin: 10px 0;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      transition: background-color 0.3s;
+    }
+    .guest.checked {
+      background-color: #e0ffe0;
+    }
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+      object-fit: cover;
+    }
+    button {
+      margin-left: auto;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    #search {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    /* Скрыть кнопку сброса всех */
+    /* #resetBtn {
+      margin-bottom: 15px;
+      padding: 8px 12px;
+      background-color: #ffdddd;
+      border: 1px solid #cc0000;
+      cursor: pointer;
+      font-size: 14px;
+    } */
+  </style>
+</head>
+<body>
+
+  <h2><center>Список гостей | Guest list</center></h2>
+  <input type="text" id="search" placeholder="Поиск по имени...">
+
+  <!-- Закомментированная кнопка "Сбросить всех" -->
+  <!-- <button id="resetBtn" onclick="resetAll()">🔄 Сбросить всех</button> -->
+
+  <div id="guests"><div class="guest">
+          <img src="./Check-in Guests_files/opredelenov.jpg" alt="">
+          <div>
+            <strong>Владимир Определенов</strong><br>
+            Vladimir Opredelenov
+          </div>
+          <button onclick="checkIn(1)">Отметить</button>
+        </div><div class="guest">
+          <img src="./Check-in Guests_files/ivanova.jpg" alt="">
+          <div>
+            <strong>Мария Иванова</strong><br>
+            Mariya Ivanova
+          </div>
+          <button onclick="checkIn(2)">Отметить</button>
+        </div></div>
+
+  <script>
+    const guests = [
+      { id: 1, name: "Владимир Определенов", name_eng: "Vladimir Opredelenov", photo: "opredelenov.jpg", checked: false },
+      { id: 2, name: "Мария Иванова", name_eng: "Mariya Ivanova", photo: "ivanova.jpg", checked: false }
+    ];
+
+    // Загружаем данные из localStorage
+    function loadGuests() {
+      const saved = localStorage.getItem('guests');
+      if (saved) {
+        const savedGuests = JSON.parse(saved);
+        for (let i = 0; i < guests.length; i++) {
+          const savedGuest = savedGuests.find(g => g.id === guests[i].id);
+          if (savedGuest) {
+            guests[i].checked = savedGuest.checked;
+          }
+        }
+      }
+    }
+
+    // Сохраняем в localStorage
+    function saveGuests() {
+      localStorage.setItem('guests', JSON.stringify(guests));
+    }
+
+    // Отображение списка
+    function render(list) {
+      const container = document.getElementById('guests');
+      container.innerHTML = "";
+
+      list.forEach(g => {
+        const div = document.createElement('div');
+        div.className = "guest" + (g.checked ? " checked" : "");
+        div.innerHTML = `
+          <img src="${g.photo}" alt="">
+          <div>
+            <strong>${g.name}</strong><br>
+            ${g.name_eng}
+          </div>
+          <button onclick="checkIn(${g.id})">${g.checked ? "✅ Вошёл" : "Отметить"}</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Отметить как вошедшего
+    function checkIn(id) {
+      const guest = guests.find(g => g.id === id);
+      if (guest) {
+        guest.checked = true;
+        saveGuests();
+        render(guests);
+      }
+    }
+
+    // Сбросить всех
+    // function resetAll() {
+    //   if (confirm("Сбросить отметки всех гостей?")) {
+    //     guests.forEach(g => g.checked = false);
+    //     saveGuests();
+    //     render(guests);
+    //   }
+    // }
+
+    // Поиск
+    document.getElementById('search').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      render(guests.filter(g =>
+        g.name.toLowerCase().includes(q) ||
+        g.name_eng.toLowerCase().includes(q)
+      ));
+    });
+
+    // Инициализация
+    loadGuests();
+    render(guests);
+  </script>
+
+
+
+</body></html>
