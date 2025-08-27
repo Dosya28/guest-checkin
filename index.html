@@ -183,7 +183,7 @@
     }
 
     // Функция для рендеринга гостей
-    function render(list) {
+    /*function render(list) {
       const container = document.getElementById('guests');
       container.innerHTML = "";
 
@@ -200,7 +200,28 @@
         `;
         container.appendChild(div);
       });
-    }
+    } */
+   // Функция для рендеринга гостей
+function render(list) {
+  const container = document.getElementById('guests');
+  container.innerHTML = "";
+
+  list.forEach(g => {
+    const div = document.createElement('div');
+    div.className = "guest" + (g.checked ? " checked" : "");
+    div.innerHTML = `
+      <img src="${g.photo}" alt="">
+      <div class="guest-info">
+        <strong>${g.name}</strong><br>
+        ${g.name_eng}
+      </div>
+      <div>
+        ${g.checked ? "Зарегистрирован" : `<button onclick="toggleCheckIn(${g.id})">Ожидает регистрации</button>`}
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
 
     // Функция для переключения состояния гостя (вошёл/не вошёл)
     async function toggleCheckIn(id) {
