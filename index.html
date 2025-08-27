@@ -4,15 +4,37 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Check-in Guests</title>
   <style>
+    /* Стили для основного контента */
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
+      text-align: center; /* Центрируем заголовок и поле поиска */
     }
+
+    /* Стили для заголовка */
     h2 {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 30px; /* Увеличен размер заголовка */
+      font-weight: bold;
     }
+
+    /* Стили для поля поиска */
+    #search {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 18px;
+      box-sizing: border-box;
+    }
+
+    /* Контейнер для списка гостей */
+    #guests {
+      text-align: left; /* Контент карточек будет выравниваться слева */
+    }
+
+    /* Стили для каждой карточки гостя */
     .guest {
       border: 1px solid #ccc;
       margin: 10px 0;
@@ -21,39 +43,49 @@
       align-items: center;
       border-radius: 5px;
       background-color: #f9f9f9;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s; /* Плавное изменение фона */
     }
+
+    /* Стили для отмеченного гостя */
     .guest.checked {
-      background-color: #e0ffe0;
+      background-color: #e0ffe0; /* Лёгкий зеленый фон для отмеченного гостя */
     }
+
+    /* Стили для изображений гостей */
     img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%; /* Сделать изображение круглым */
       margin-right: 15px;
-      object-fit: cover;
+      object-fit: cover; /* Обрезаем изображение по размеру */
     }
+
+    /* Контейнер для информации о госте */
+    .guest-info {
+      flex-grow: 1;
+    }
+
+    /* Стили для кнопок */
     button {
-      margin-left: auto;
-      padding: 5px 10px;
+      padding: 6px 12px;
       cursor: pointer;
-    }
-    #search {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 15px;
-      font-size: 16px;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
-  <h2><center>Список гостей | Guest list</center></h2>
+  <!-- Заголовок страницы -->
+  <h2>Список гостей | Guest list</h2>
+
+  <!-- Поле для поиска гостей -->
   <input type="text" id="search" placeholder="Поиск по имени...">
 
+  <!-- Контейнер для отображения списка гостей -->
   <div id="guests"></div>
 
   <script>
+    // Массив гостей
     const guests = [
       { id: 1, name: "Владимир Определенов", name_eng: "Vladimir Opredelenov", photo: "opredelenov.jpg", checked: false },
       { id: 2, name: "Мария Иванова", name_eng: "Mariya Ivanova", photo: "ivanova.jpg", checked: false },
@@ -61,7 +93,7 @@
       { id: 4, name: "Тимур Кулибаев", name_eng: "Timur Kulibayev", photo: "kulibayev.jpg", checked: false }
     ];
 
-    // Загружаем данные из localStorage
+    // Загружаем данные о гостях из localStorage
     function loadGuests() {
       const saved = localStorage.getItem('guests');
       if (saved) {
@@ -69,59 +101,60 @@
         for (let i = 0; i < guests.length; i++) {
           const savedGuest = savedGuests.find(g => g.id === guests[i].id);
           if (savedGuest) {
-            guests[i].checked = savedGuest.checked;
+            guests[i].checked = savedGuest.checked; // Обновляем состояние гостей
           }
         }
       }
     }
 
-    // Сохраняем в localStorage
+    // Сохраняем состояние гостей в localStorage
     function saveGuests() {
       localStorage.setItem('guests', JSON.stringify(guests));
     }
 
-    // Отображение списка
+    // Отображение списка гостей на странице
     function render(list) {
       const container = document.getElementById('guests');
-      container.innerHTML = "";
+      container.innerHTML = ""; // Очищаем контейнер перед рендером
 
+      // Для каждого гостя создаём карточку
       list.forEach(g => {
         const div = document.createElement('div');
-        div.className = "guest" + (g.checked ? " checked" : "");
+        div.className = "guest" + (g.checked ? " checked" : ""); // Добавляем класс для отмеченного гостя
         div.innerHTML = `
           <img src="${g.photo}" alt="">
-          <div>
+          <div class="guest-info">
             <strong>${g.name}</strong><br>
             ${g.name_eng}
           </div>
           <button onclick="toggleCheckIn(${g.id})">${g.checked ? "❌ Отменить" : "✅ Вошёл"}</button>
         `;
-        container.appendChild(div);
+        container.appendChild(div); // Добавляем карточку в контейнер
       });
     }
 
-    // Переключить отметку (вошёл/не вошёл)
+    // Функция для переключения состояния гостя (вошёл/не вошёл)
     function toggleCheckIn(id) {
       const guest = guests.find(g => g.id === id);
       if (guest) {
-        guest.checked = !guest.checked;  // Переключаем состояние
-        saveGuests();
-        render(guests);
+        guest.checked = !guest.checked; // Переключаем состояние
+        saveGuests(); // Сохраняем изменения
+        render(guests); // Обновляем отображение
       }
     }
 
-    // Поиск
+    // Функция для поиска гостей по имени
     document.getElementById('search').addEventListener('input', e => {
-      const q = e.target.value.toLowerCase();
+      const q = e.target.value.toLowerCase(); // Получаем текст для поиска
       render(guests.filter(g =>
-        g.name.toLowerCase().includes(q) ||
-        g.name_eng.toLowerCase().includes(q)
+        g.name.toLowerCase().includes(q) || // Ищем по русскому имени
+        g.name_eng.toLowerCase().includes(q) // Ищем по английскому имени
       ));
     });
 
-    // Инициализация
-    loadGuests();
-    render(guests);
+    // Инициализация страницы
+    loadGuests(); // Загружаем данные из localStorage
+    render(guests); // Отображаем гостей
   </script>
 
 </body>
