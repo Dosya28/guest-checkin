@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0048)file:///C:/Users/ai.bagdatkyzy/Desktop/test.html -->
-<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
+<html lang="ru">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Check-in Guests</title>
   <style>
     body {
@@ -44,15 +44,6 @@
       margin-bottom: 15px;
       font-size: 16px;
     }
-    /* Скрыть кнопку сброса всех */
-    /* #resetBtn {
-      margin-bottom: 15px;
-      padding: 8px 12px;
-      background-color: #ffdddd;
-      border: 1px solid #cc0000;
-      cursor: pointer;
-      font-size: 14px;
-    } */
   </style>
 </head>
 <body>
@@ -60,24 +51,7 @@
   <h2><center>Список гостей | Guest list</center></h2>
   <input type="text" id="search" placeholder="Поиск по имени...">
 
-  <!-- Закомментированная кнопка "Сбросить всех" -->
-  <!-- <button id="resetBtn" onclick="resetAll()">🔄 Сбросить всех</button> -->
-
-  <div id="guests"><div class="guest">
-          <img src="./Check-in Guests_files/opredelenov.jpg" alt="">
-          <div>
-            <strong>Владимир Определенов</strong><br>
-            Vladimir Opredelenov
-          </div>
-          <button onclick="checkIn(1)">Отметить</button>
-        </div><div class="guest">
-          <img src="./Check-in Guests_files/ivanova.jpg" alt="">
-          <div>
-            <strong>Мария Иванова</strong><br>
-            Mariya Ivanova
-          </div>
-          <button onclick="checkIn(2)">Отметить</button>
-        </div></div>
+  <div id="guests"></div>
 
   <script>
     const guests = [
@@ -118,30 +92,21 @@
             <strong>${g.name}</strong><br>
             ${g.name_eng}
           </div>
-          <button onclick="checkIn(${g.id})">${g.checked ? "✅ Вошёл" : "Отметить"}</button>
+          <button onclick="toggleCheckIn(${g.id})">${g.checked ? "❌ Отменить" : "✅ Вошёл"}</button>
         `;
         container.appendChild(div);
       });
     }
 
-    // Отметить как вошедшего
-    function checkIn(id) {
+    // Переключить отметку (вошёл/не вошёл)
+    function toggleCheckIn(id) {
       const guest = guests.find(g => g.id === id);
       if (guest) {
-        guest.checked = true;
+        guest.checked = !guest.checked;  // Переключаем состояние
         saveGuests();
         render(guests);
       }
     }
-
-    // Сбросить всех
-    // function resetAll() {
-    //   if (confirm("Сбросить отметки всех гостей?")) {
-    //     guests.forEach(g => g.checked = false);
-    //     saveGuests();
-    //     render(guests);
-    //   }
-    // }
 
     // Поиск
     document.getElementById('search').addEventListener('input', e => {
@@ -157,6 +122,5 @@
     render(guests);
   </script>
 
-
-
-</body></html>
+</body>
+</html>
