@@ -4,6 +4,8 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Check-in Guests</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
   <style>
     /* Стили для основного контента */
     body {
@@ -46,14 +48,6 @@
     .guest.checked {
       background-color: #e0ffe0;
     }
-
-    /* img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin-right: 15px;
-      object-fit: cover;
-    } */
 
     img {
       width: 70px;
@@ -147,172 +141,114 @@
       { id: 24, name: "Ансельм Кифер", name_eng: "Anselm Kiefer", photo: "kiefer.jpg", checked: false },
       { id: 25, name: "Даурен Садыков", name_eng: "Dauren Sadykov", photo: "sadykov.jpg", checked: false },
       { id: 26, name: "Меруерт Калиева", name_eng: "Meruert Kaliyeva", photo: "kaliyeva.jpg", checked: false },
-      // { id: 27, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 28, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 29, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 30, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 31, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 32, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 33, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 34, name: "", name_eng: "", photo: ".jpg", checked: false },  
-      // { id: 35, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 36, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 37, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 38, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 39, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 40, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 41, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 42, name: "", name_eng: "", photo: ".jpg", checked: false },  
-      // { id: 43, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 44, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 45, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 46, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 47, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 48, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 49, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 50, name: "", name_eng: "", photo: ".jpg", checked: false },  
-      // { id: 51, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 52, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 53, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 54, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 55, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 56, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 57, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 58, name: "", name_eng: "", photo: ".jpg", checked: false },  
-      // { id: 59, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 60, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 61, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 62, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 63, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 64, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 65, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 66, name: "", name_eng: "", photo: ".jpg", checked: false },  
-      // { id: 67, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 68, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 69, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 70, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 71, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 72, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 73, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 74, name: "", name_eng: "", photo: ".jpg", checked: false }, 
-      // { id: 75, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 76, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 77, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 78, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 79, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 80, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 81, name: "", name_eng: "", photo: ".jpg", checked: false },  
-      // { id: 82, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 83, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 84, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 85, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 86, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 87, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 88, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 89, name: "", name_eng: "", photo: ".jpg", checked: false },  
-      // { id: 90, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 91, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 92, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 93, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 94, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 95, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 96, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 97, name: "", name_eng: "", photo: ".jpg", checked: false },
-      // { id: 98, name: "", name_eng: "", photo: ".jpg", checked: false },      
-
-
       { id: 99, name: "Тимур Турлов", name_eng: "Timur Turlov", photo: "turlov.jpg", checked: false },
       { id: 100, name: "Владимир Определенов", name_eng: "Vladimir Opredelenov", photo: "opredelenov.jpg", checked: false },
       { id: 101, name: "Алмагуль Менлибаева", name_eng: "Almagul Menlibayeva", photo: "menlibayeva.jpg", checked: false },
       { id: 102, name: "Айдана Бағдатқызы", name_eng: "Aidana Bagdatkyzy", photo: "bagdatkyzy.jpeg", checked: false },
-      { id: 103, name: "Тимур Кулибаев", name_eng: "Timur Kulibayev", photo: "kulibayev.jpg", checked: false },
-      { id: 104, name: "Вячеслав Ким", name_eng: "Vyacheslav Kim", photo: "kim.jpeg", checked: false },
+      { id: 103, name: "Тимур Кулибаев", name_eng: "Timur Kulibayev", photo: "kulibayev.jpg", checked: false }, 
+      { id: 104, name: "Вячеслав Ким", name_eng: "Vyacheslav Kim", photo: "kim.jpeg", checked: false }, 
       { id: 105, name: "Михаил Ломтадзе", name_eng: "Mikhail Lomtadze", photo: "lomtadze.jpg", checked: false }
     ];
 
-    // Загружаем данные из Firestore
-    async function loadGuests() {
-      const snapshot = await getDocs(collection(db, "guests"));
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const guest = guests.find(g => g.id === data.id);
-        if (guest) guest.checked = data.checked;
-      });
-      render(guests);
-    }
-
-    // Сохраняем данные в Firestore
+    // Сохранение данных о госте в Firebase
     async function saveGuest(guest) {
-      await setDoc(doc(db, "guests", String(guest.id)), guest);
+      const docRef = doc(db, "guests", guest.id.toString());
+      await setDoc(docRef, { id: guest.id, checked: guest.checked });
     }
 
-    // Функция для рендеринга гостей
-    /*function render(list) {
-      const container = document.getElementById('guests');
-      container.innerHTML = "";
+    // Отображение списка гостей
+    function render(guests) {
+      const guestsList = document.getElementById('guests');
+      guestsList.innerHTML = ''; // Очищаем текущий список
 
-      list.forEach(g => {
-        const div = document.createElement('div');
-        div.className = "guest" + (g.checked ? " checked" : "");
-        div.innerHTML = `
-          <img src="${g.photo}" alt="">
+      guests.forEach(guest => {
+        const guestElement = document.createElement('div');
+        guestElement.classList.add('guest');
+        if (guest.checked) guestElement.classList.add('checked');
+
+        guestElement.innerHTML = `
+          <img src="${guest.photo}" alt="${guest.name}">
           <div class="guest-info">
-            <strong>${g.name}</strong><br>
-            ${g.name_eng}
+            <h4>${guest.name}</h4>
+            <p>${guest.name_eng}</p>
           </div>
-          <button onclick="toggleCheckIn(${g.id})">${g.checked ? "❌ Отменить" : "✅ Вошёл"}</button>
+          <button onclick="toggleCheckIn(${guest.id})">${guest.checked ? 'Отметить как не пришедшего' : 'Отметить как пришедшего'}</button>
         `;
-        container.appendChild(div);
+
+        guestsList.appendChild(guestElement);
       });
-    } */
-   // Функция для рендеринга гостей
-function render(list) {
-  const container = document.getElementById('guests');
-  container.innerHTML = "";
+    }
 
-  list.forEach(g => {
-    const div = document.createElement('div');
-    div.className = "guest" + (g.checked ? " checked" : "");
-    div.innerHTML = `
-      <img src="${g.photo}" alt="">
-      <div class="guest-info">
-        <strong>${g.name}</strong><br>
-        ${g.name_eng}
-      </div>
-      <div>
-        ${g.checked ? "Зарегистрирован" : `<button onclick="toggleCheckIn(${g.id})">Ожидает регистрации</button>`}
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
-
-    // Функция для переключения состояния гостя (вошёл/не вошёл)
+    // Переключение состояния Check-in гостя
     async function toggleCheckIn(id) {
       const guest = guests.find(g => g.id === id);
       if (guest) {
         guest.checked = !guest.checked;
-        await saveGuest(guest);
+
+        // Сохраняем в localStorage
+        localStorage.setItem('guest-checkins', JSON.stringify(guests));
+
+        // Сохраняем в Firebase, если есть интернет
+        if (navigator.onLine) {
+          await saveGuest(guest);
+        } else {
+          console.warn("Offline: изменения сохранены локально.");
+        }
+
         render(guests);
       }
     }
 
-    // Функция поиска
-    document.getElementById('search').addEventListener('input', e => {
-      const q = e.target.value.toLowerCase();
-      render(guests.filter(g =>
-        g.name.toLowerCase().includes(q) ||
-        g.name_eng.toLowerCase().includes(q)
-      ));
-    });
+    // Загрузка гостей
+    async function loadGuests() {
+      // 1. Применяем локальные данные, если они есть
+      const localData = localStorage.getItem('guest-checkins');
+      if (localData) {
+        const parsed = JSON.parse(localData);
+        parsed.forEach(ld => {
+          const g = guests.find(g => g.id === ld.id);
+          if (g) g.checked = ld.checked;
+        });
+      }
 
-    // Инициализация данных
+      // 2. Если онлайн — загружаем с Firebase и обновляем локальные данные
+      if (navigator.onLine) {
+        try {
+          const snapshot = await getDocs(collection(db, "guests"));
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const guest = guests.find(g => g.id === data.id);
+            if (guest) guest.checked = data.checked;
+          });
+          // Сохраняем полученные данные локально
+          localStorage.setItem('guest-checkins', JSON.stringify(guests));
+        } catch (error) {
+          console.warn("Не удалось загрузить из Firestore:", error);
+        }
+      }
+
+      render(guests);
+    }
+
+    // Загрузка списка гостей при запуске
     loadGuests();
 
-    // Делаем функцию доступной в глобальной области видимости
-    window.toggleCheckIn = toggleCheckIn;
-  </script>
+    // Фильтрация гостей по имени
+    document.getElementById('search').addEventListener('input', (event) => {
+      const searchTerm = event.target.value.toLowerCase();
+      const filteredGuests = guests.filter(guest => guest.name.toLowerCase().includes(searchTerm));
+      render(filteredGuests);
+    });
 
+    // Регистрация сервис-воркера
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('SW registered', reg))
+          .catch(err => console.error('SW registration failed', err));
+      });
+    }
+  </script>
 </body>
 
 </html>
