@@ -10,17 +10,15 @@
       padding: 20px;
       max-width: 700px;
       margin: auto;
-      text-align: center; /* Центрируем заголовок и поле поиска */
+      text-align: center;
     }
 
-    /* Стили для заголовка */
     h2 {
       margin-bottom: 20px;
-      font-size: 30px; /* Увеличен размер заголовка */
+      font-size: 30px;
       font-weight: bold;
     }
 
-    /* Стили для поля поиска */
     #search {
       width: 100%;
       padding: 10px;
@@ -29,12 +27,10 @@
       box-sizing: border-box;
     }
 
-    /* Контейнер для списка гостей */
     #guests {
-      text-align: left; /* Контент карточек будет выравниваться слева */
+      text-align: left;
     }
 
-    /* Стили для каждой карточки гостя */
     .guest {
       border: 1px solid #ccc;
       margin: 10px 0;
@@ -43,29 +39,25 @@
       align-items: center;
       border-radius: 5px;
       background-color: #f9f9f9;
-      transition: background-color 0.3s; /* Плавное изменение фона */
+      transition: background-color 0.3s;
     }
 
-    /* Стили для отмеченного гостя */
     .guest.checked {
-      background-color: #e0ffe0; /* Лёгкий зеленый фон для отмеченного гостя */
+      background-color: #e0ffe0;
     }
 
-    /* Стили для изображений гостей */
     img {
       width: 70px;
       height: 70px;
-      border-radius: 50%; /* Сделать изображение круглым */
+      border-radius: 50%;
       margin-right: 15px;
-      object-fit: cover; /* Обрезаем изображение по размеру */
+      object-fit: cover;
     }
 
-    /* Контейнер для информации о госте */
     .guest-info {
       flex-grow: 1;
     }
 
-    /* Стили для кнопок */
     button {
       padding: 6px 12px;
       cursor: pointer;
@@ -75,16 +67,32 @@
 </head>
 <body>
 
-  <!-- Заголовок страницы -->
   <h2>Список гостей | Guest list</h2>
-
-  <!-- Поле для поиска гостей -->
   <input type="text" id="search" placeholder="Поиск по имени...">
-
-  <!-- Контейнер для отображения списка гостей -->
   <div id="guests"></div>
 
-  <script>
+  <script type="module">
+    // Подключение Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-analytics.js";
+    import { getFirestore, collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+    // Конфигурация Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCABH-LAXWBmJVSzTx1HdK6KtqbWzQuLvU",
+      authDomain: "guest-app-13f5e.firebaseapp.com",
+      projectId: "guest-app-13f5e",
+      storageBucket: "guest-app-13f5e.firebasestorage.app",
+      messagingSenderId: "160660754827",
+      appId: "1:160660754827:web:8eec5587338161ebf85f8e",
+      measurementId: "G-ELLRJKMZTQ"
+    };
+
+    // Инициализация Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
     // Массив гостей
     const guests = [
       { id: 1, name: "Владимир Определенов", name_eng: "Vladimir Opredelenov", photo: "opredelenov.jpg", checked: false },
@@ -93,34 +101,30 @@
       { id: 4, name: "Тимур Кулибаев", name_eng: "Timur Kulibayev", photo: "kulibayev.jpg", checked: false }
     ];
 
-    // Загружаем данные о гостях из localStorage
-    function loadGuests() {
-      const saved = localStorage.getItem('guests');
-      if (saved) {
-        const savedGuests = JSON.parse(saved);
-        for (let i = 0; i < guests.length; i++) {
-          const savedGuest = savedGuests.find(g => g.id === guests[i].id);
-          if (savedGuest) {
-            guests[i].checked = savedGuest.checked; // Обновляем состояние гостей
-          }
-        }
-      }
+    // Загружаем данные из Firestore
+    async function loadGuests() {
+      const snapshot = await getDocs(collection(db, "guests"));
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const guest = guests.find(g => g.id === data.id);
+        if (guest) guest.checked = data.checked;
+      });
+      render(guests);
     }
 
-    // Сохраняем состояние гостей в localStorage
-    function saveGuests() {
-      localStorage.setItem('guests', JSON.stringify(guests));
+    // Сохраняем данные в Firestore
+    async function saveGuest(guest) {
+      await setDoc(doc(db, "guests", String(guest.id)), guest);
     }
 
-    // Отображение списка гостей на странице
+    // Функция для рендеринга гостей
     function render(list) {
       const container = document.getElementById('guests');
-      container.innerHTML = ""; // Очищаем контейнер перед рендером
+      container.innerHTML = "";
 
-      // Для каждого гостя создаём карточку
       list.forEach(g => {
         const div = document.createElement('div');
-        div.className = "guest" + (g.checked ? " checked" : ""); // Добавляем класс для отмеченного гостя
+        div.className = "guest" + (g.checked ? " checked" : "");
         div.innerHTML = `
           <img src="${g.photo}" alt="">
           <div class="guest-info">
@@ -129,32 +133,34 @@
           </div>
           <button onclick="toggleCheckIn(${g.id})">${g.checked ? "❌ Отменить" : "✅ Вошёл"}</button>
         `;
-        container.appendChild(div); // Добавляем карточку в контейнер
+        container.appendChild(div);
       });
     }
 
     // Функция для переключения состояния гостя (вошёл/не вошёл)
-    function toggleCheckIn(id) {
+    async function toggleCheckIn(id) {
       const guest = guests.find(g => g.id === id);
       if (guest) {
-        guest.checked = !guest.checked; // Переключаем состояние
-        saveGuests(); // Сохраняем изменения
-        render(guests); // Обновляем отображение
+        guest.checked = !guest.checked;
+        await saveGuest(guest);
+        render(guests);
       }
     }
 
-    // Функция для поиска гостей по имени
+    // Функция поиска
     document.getElementById('search').addEventListener('input', e => {
-      const q = e.target.value.toLowerCase(); // Получаем текст для поиска
+      const q = e.target.value.toLowerCase();
       render(guests.filter(g =>
-        g.name.toLowerCase().includes(q) || // Ищем по русскому имени
-        g.name_eng.toLowerCase().includes(q) // Ищем по английскому имени
+        g.name.toLowerCase().includes(q) ||
+        g.name_eng.toLowerCase().includes(q)
       ));
     });
 
-    // Инициализация страницы
-    loadGuests(); // Загружаем данные из localStorage
-    render(guests); // Отображаем гостей
+    // Инициализация данных
+    loadGuests();
+
+    // Делаем функцию доступной в глобальной области видимости
+    window.toggleCheckIn = toggleCheckIn;
   </script>
 
 </body>
